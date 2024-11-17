@@ -69,21 +69,21 @@ func NewWinDivertHandle(filter string) (*WinDivertHandle, error) {
 	if err != nil {
 		return nil, err
 	}
-	return NewWinDivertHandleWithFlags(filter, 0)
+	return NewWinDivertHandleWithFlags(filter, LayerNetwork, 0)
 }
 
 // Create a new WinDivertHandle by calling WinDivertOpen and returns it
 // The string parameter is the fiter that packets have to match
 // and flags are the used flags used
 // https://reqrypt.org/windivert-doc.html#divert_open
-func NewWinDivertHandleWithFlags(filter string, flags uint8) (*WinDivertHandle, error) {
+func NewWinDivertHandleWithFlags(filter string, layer Layer, flags uint8) (*WinDivertHandle, error) {
 	filterBytePtr, err := syscall.BytePtrFromString(filter)
 	if err != nil {
 		return nil, err
 	}
 
 	handle, _, err := winDivertOpen.Call(uintptr(unsafe.Pointer(filterBytePtr)),
-		uintptr(0),
+		uintptr(layer),
 		uintptr(0),
 		uintptr(flags))
 
