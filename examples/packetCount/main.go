@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/yanlinLiu0424/godivert/header"
-	"github.com/yanlinLiu0424/godivert/windivert"
+	"github.com/alpagit/godivert/header"
+	"github.com/alpagit/godivert/windivert"
 )
 
 var icmpv4, icmpv6, udp, tcp, unknown, served uint
